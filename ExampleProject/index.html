@@ -1,0 +1,97 @@
+<!DOCTYPEhtml><head>
+<title> Game Name</title>
+
+
+<script src="jquery-1.11.2.min.js"></script>
+<script src="tracery.min.js"></script>
+<script src="input_output.js"></script>
+<script src="grammar.js"></script>
+<script src="mathUtil.js"></script>
+<script src="finderMinigame.js"></script>
+<script src="inventoryHelpers.js"></script>
+
+<script src="narrativeManager.js"></script>
+<script src="incremental.js"></script>
+<script src="statAnalysis.js"></script>
+
+<style>
+.selected {
+  color: red;
+  background-color: #beef
+}
+</style>
+
+
+</head>
+<body>
+<div class="stage" id="stage1" style="z-index: 1"> 
+
+
+<h1> <span id=era>Little Bit of Slime</span></h1> 
+<div id="finderReports" style="overflow-y: scroll; border: 1px solid black; height: 100px; width: 600px"> </div> 
+
+<button onclick=game.swichPanels("scavenge") id="showScavenge"> Scavenge</button>
+<button onclick=game.swichPanels("inventory") id="showInventory"> Inventory</button>
+<button onclick=game.swichPanels("above") id="showAbove"> Above</button>
+
+<div class="panel" id="scavenge"> 
+  <table>
+  <tr> <td>
+  <table>
+  <tr><td> Biomass</td> <td> </td> <td class="biomassNumber"></td><td><button onclick=game.collectBiomass()> Collect Biomass</button></td></tr>
+  <tr id="collectorRow"><td> Collectors</td> <td></td> <td class="collectorNumber"></td><td><button onclick=game.spawnCollector()> Spawn Collector</button></td><td>Cost 10 Biomass</td></tr>
+  <tr id="finderRow"><td> Finder</td> <td></td> <td class="finderNumber"></td><td><button onclick=game.spawnFinder()> Spawn Finder</button></td><td>Cost 50 Biomass</td></tr>
+  <tr id="abominationRow"><td> Abominations</td> <td></td> <td class="bodiesNumber"></td><td></td></tr>
+  <tr> </tr> 
+  <tr id="penniesRow"><td> Pennies</td> <td></td> <td class="penniesNumber"></td><td></td></tr>
+  </table>
+</td>
+
+<td>
+  <td><canvas width=500 height=500 style="background-color:black;" id="finderMinigame" onclick=finderCommand(event)> </canvas> </td>
+  </td>
+  </tr>
+  </table>
+
+</div>
+
+
+
+<div class="panel"  id="inventory">
+<table><tr>
+<td>
+  <h2> Collected Items</h2>
+  <ul id="inventorySelect"> </ul>
+  
+  <span id="makeAbomination"> <button id="makeAbominationButton" onclick=produceAbomination()> Make Abomination </button> Cost 100 Biomass per component.
+  Biomass: <span class="biomassNumber"></span></span>
+</td>
+<td id="abominationTasks">
+  <h2> Underground Abominations and Their Tasks</h2>
+  <ul id="abominationJobs"> </ul>
+</td>
+
+
+
+</tr></table>
+ </div>
+
+
+
+
+<div class="panel"  id="above"> <h1> Human's aren't ready for you. . .  But you're ready for them. . . </div>
+
+
+</div>
+<div class="stage" id="stage2" style="z-index: 1"> 
+
+<h1> (2) Slimey Beast Society</h1> 
+
+<div id="human"> </div>
+
+</div>
+<div class="stage" id="stage3" style="z-index: 1"> <h1>Game Over</h1><h2>You ran out of food, panicked, and ate yourself to death</h2></div>
+
+
+</body>
+</html>

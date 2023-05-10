@@ -1,0 +1,74 @@
+<!DOCTYPEhtml><head>
+<title> Game Name</title>
+
+
+<script src="jquery-1.11.2.min.js"></script>
+<script src="input_output.js"></script>
+<script src="mathUtil.js"></script>
+
+<script src="narrativeManager.js"></script>
+<script src="incremental.js"></script>
+<script src="statAnalysis.js"></script>
+
+<style>
+.selected {
+  color: red;
+  background-color: #beef
+}
+#reports {
+  overflow-y: scroll; 
+  border: 1px solid black; 
+  height: 100px; 
+  width: 50%;
+  margins:auto;
+  display: inline-block;
+}
+</style>
+
+
+</head>
+<body>
+<div id="reports" style=> </div> 
+<div class="stage" id="stage1" style="z-index: 1"> 
+
+
+<h1> <span id=era>Name</span></h1> 
+
+  <button onclick=game.swichPanels("panel1") id="showPanel1"> 1</button>
+  <button onclick=game.swichPanels("panel2") id="showPanel2"> 2</button>
+  <button onclick=game.swichPanels("panel3") id="showPanel3"> 3</button>
+
+  <div class="panel" id="panel1"> 
+    <table>
+    <tr> <td>
+    <table>
+    <tr><td> Resource1</td> <td> </td> <td class="resource1Number"></td><td><button onclick=game.gainResource1()> Collect Resource1 </button></td></tr>
+    <tr id="resource2Row"><td> Resource2</td> <td></td> <td class="resource2Number"></td><td><button onclick=game.gainResource2()> Spawn Collector</button></td><td>Cost 5 Resource1</td></tr>
+    </table>
+
+
+  </div>
+
+
+
+<!-- delete the following 2 panels if you structuring with sequential stages -->
+  <div class="panel"  id="panel2">
+  <h1> Panel 2</h1>
+
+   </div>
+
+  <div class="panel"  id="panel3"> <h1> Panel 3</div>
+  </div>
+
+<!-- delete the following 2 stages if you are only doing panels -->
+<div class="stage" id="stage2" style="z-index: 1"> <h1>Stage 2</h1><h2>Subtitle</h2></div>
+<div class="panel"  id="panel2-1">
+</div>
+
+<div class="stage" id="stage3" style="z-index: 1"> <h1>Stage 3</h1><h2>Subtitle</h2>
+<div class="panel"  id="panel3-1">
+</div>
+
+
+</body>
+</html>
