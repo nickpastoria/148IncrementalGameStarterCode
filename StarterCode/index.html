@@ -1,5 +1,5 @@
 <!DOCTYPEhtml><head>
-<title> Game Name</title>
+<title>Newsletter Clicker</title>
 
 
 <script src="jquery-1.11.2.min.js"></script>
@@ -32,18 +32,20 @@
 <div class="stage" id="stage1" style="z-index: 1"> 
 
 
-<h1> <span id=era>Name</span></h1> 
+<h1> <span id=era>Newsletter Clicker</span></h1> 
 
-  <button onclick=game.swichPanels("panel1") id="showPanel1"> 1</button>
-  <button onclick=game.swichPanels("panel2") id="showPanel2"> 2</button>
-  <button onclick=game.swichPanels("panel3") id="showPanel3"> 3</button>
+  <button onclick=game.swichPanels("panel1") id="showPanel1"> Newsletter</button>
+  <button onclick=game.swichPanels("panel2") id="showPanel2"> Marketing</button>
+  <button onclick=game.swichPanels("panel3") id="showPanel3"> Social Media Marketing</button>
 
   <div class="panel" id="panel1"> 
     <table>
     <tr> <td>
     <table>
-    <tr><td> Resource1</td> <td> </td> <td class="resource1Number"></td><td><button onclick=game.gainResource1()> Collect Resource1 </button></td></tr>
-    <tr id="resource2Row"><td> Resource2</td> <td></td> <td class="resource2Number"></td><td><button onclick=game.gainResource2()> Spawn Collector</button></td><td>Cost 5 Resource1</td></tr>
+    <tr> <td> Money: $</td> <td class="moneyNumber"></td></tr>
+    <tr> <td> Views: </td> <td class="viewsNumber"></td></tr>
+    <tr><td> Articles Written</td> <td> </td> <td class="resource1Number"></td><td><button onclick=game.writeArticle()> Write Article </button></td></tr>
+    <tr id="resource2Row"><td> Resource2</td> <td></td> <td class="resource2Number"></td><td><button onclick=game.gainResource2()> Hire Writer</button></td><td>Cost: $50</td></tr>
     </table>
 
 
