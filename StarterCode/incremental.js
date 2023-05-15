@@ -13,9 +13,11 @@ const GameInstance = class {
 
     this.views = 0;
     this.money = 0;
+    this.moneyScalingFactor = 2;
     this.articlesWritten = 0;
     this.resource1 = 0;
     this.resource2 = 0;
+    this.baseResource2Cost = 50;
       
     
       
@@ -48,14 +50,29 @@ const GameInstance = class {
   // the following functions are to be called from buttons in the index.html
   gainMoney(){ this.money += 1; this.updateDisplay();}
   gainResource1(){ this.resource1 +=1; this.updateDisplay();}
-  gainResource2(){ this.resource2 +=2; this.money -= 5; this.updateDisplay();}
+  gainResource2()
+  { 
+    const cost = Math.floor(this.baseResource2Cost * Math.pow(this.moneyScalingFactor, this.resource2));
+
+    if(this.money > cost)
+    {
+      this.resource2 +=1;
+      this.money -= cost;
+      const costElement = document.querySelector(".resource2Cost");
+      costElement.textContent = cost;
+      this.updateDisplay();
+    }
+    
+  }
 
   calculateViews() {
     const baseViews = 0.5; // The base number of views per article
     const articleMultiplier = 1.125; // The multiplier for each article
   
     // Calculate the total views based on the number of articles
-    const totalViews = (baseViews * Math.pow(articleMultiplier, this.articlesWritten));
+    // Calculate the views based on diminishing returns
+    const totalViews = calculateDiminishingViews(this.articlesWritten, baseViews, articleMultiplier);
+
   
     // Return the total views
     return Math.floor(totalViews);
@@ -127,3 +144,47 @@ $( document ).ready(function() {
   
 
 })
+
+/**
+ * Calculates the effective resource count after applying diminishing returns using the given multiplier.
+ *
+ * @param {number} resourceCount - The current resource count.
+ * @param {number} multiplier - The multiplier to apply to the effective resource count.
+ * @return {number} The effective resource count after applying diminishing returns and multiplying by the multiplier.
+ */
+
+function applyDiminishingReturns(resourceCount, multiplier) {
+  const maxResourceCount = 100; // Maximum resource count for full effectiveness
+  const diminishingFactor = 0.5; // Diminishing factor (adjust as needed)
+  
+  if (resourceCount > maxResourceCount) {
+    const effectiveCount = maxResourceCount + (resourceCount - maxResourceCount) * diminishingFactor;
+    return Math.floor(effectiveCount * multiplier);
+  } else {
+    return Math.floor(resourceCount * multiplier);
+  }
+}
+
+/**
+ * Calculates the number of views an author's articles will receive based on the number of 
+ * articles they have written, the base number of views per article, and a multiplier for 
+ * each subsequent article. If the author has written more than 10 articles, the effectiveness 
+ * of each subsequent article will be reduced by a factor of 0.75.
+ *
+ * @param {number} articlesWritten - The total number of articles written by the author
+ * @param {number} baseViews - The base number of views per article
+ * @param {number} articleMultiplier - The multiplier for each subsequent article
+ * @return {number} - The calculated number of views for the author's articles
+ */
+
+function calculateDiminishingViews(articlesWritten, baseViews, articleMultiplier) {
+  const maxArticles = 100; // Maximum number of articles for full effectiveness
+  const diminishingFactor = 0.75; // Diminishing factor (adjust as needed)
+  
+  if (articlesWritten > maxArticles) {
+    const effectiveArticles = maxArticles + (articlesWritten - maxArticles) * diminishingFactor;
+    return Math.floor(baseViews * Math.pow(articleMultiplier, effectiveArticles));
+  } else {
+    return Math.floor(baseViews * Math.pow(articleMultiplier, articlesWritten));
+  }
+}
