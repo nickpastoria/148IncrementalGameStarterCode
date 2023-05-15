@@ -51,11 +51,11 @@ const GameInstance = class {
   gainResource2(){ this.resource2 +=2; this.money -= 5; this.updateDisplay();}
 
   calculateViews() {
-    const baseViews = 10; // The base number of views per article
-    const articleMultiplier = 1.5; // The multiplier for each article
+    const baseViews = 0.5; // The base number of views per article
+    const articleMultiplier = 1.125; // The multiplier for each article
   
     // Calculate the total views based on the number of articles
-    const totalViews = baseViews * Math.pow(articleMultiplier, this.articlesWritten);
+    const totalViews = (baseViews * Math.pow(articleMultiplier, this.articlesWritten));
   
     // Return the total views
     return Math.floor(totalViews);
@@ -64,8 +64,9 @@ const GameInstance = class {
   writeArticle() {
     // Code to create a new article
     this.resource1 += 1;
+    this.articlesWritten += 1;
     // Increment the views count based on the new article
-    this.views += this.calculateViews();
+    this.views == this.calculateViews();
   
     // Call the calculateIncome() function to determine the money earned
     this.calculateIncome();
@@ -76,8 +77,14 @@ const GameInstance = class {
   
   
   runResource2Work(){
+    if(this.articlesWritten > 1)
+    {
+      this.articlesWritten += this.resource2;
       this.resource1 += this.resource2;
-      
+      this.views = this.calculateViews();
+      this.calculateIncome();
+      this.updateDisplay();
+    }
   }
   
     
