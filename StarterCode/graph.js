@@ -8,26 +8,53 @@ $(document).ready(function() {
         data: {
             labels: [],  // Initially, no data points
             datasets: [{
-                label: 'Money Over Time',
+                label: 'Views',
                 data: [],  // Initially, no data points
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            },{
+                label: 'Income',
+                data: [],  // Initially, no data points
+                fill: false,
+                borderColor: 'rgb(256, 10, 10)',
                 tension: 0.1
             }]
         },
     });
 });
 
-// Then in your game logic, whenever the money value changes, add a data point to the chart:
-function updateMoney(newMoneyValue) {
-    // Add a data point with the current time and the new money value
-    moneyChart.data.labels.push(new Date().toLocaleTimeString());
-    moneyChart.data.datasets[0].data.push(newMoneyValue);
-    // Remove the first data point if there are too many
-    if (moneyChart.data.labels.length > 100) {
+function newColumn() {
+    if(moneyChart.data.labels.length > 100)
+    {
         moneyChart.data.labels.shift();
+    }
+    moneyChart.data.labels.push("");
+}
+
+function updateMoney(newMoneyValue) {
+
+    if (moneyChart.data.datasets[1].data.length > 100) {
+        moneyChart.data.datasets[1].data.shift();
+    }
+    // Add a data point with the current time and the new money value
+    moneyChart.data.datasets[1].data.push(newMoneyValue);
+    // Remove the first data point if there are too many
+
+    // Update the chart
+    moneyChart.update();
+}
+
+
+function updateViews(newViewsValue) {
+
+    if (moneyChart.data.datasets[0].data.length > 100) {
         moneyChart.data.datasets[0].data.shift();
     }
+    // Add a data point with the current time and the new money value
+    moneyChart.data.datasets[0].data.push(newViewsValue);
+    // Remove the first data point if there are too many
+
     // Update the chart
     moneyChart.update();
 }

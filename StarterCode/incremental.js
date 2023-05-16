@@ -18,6 +18,8 @@ const GameInstance = class {
     this.resource1 = 0;
     this.resource2 = 0;
     this.baseResource2Cost = 1;
+    this.recruiters = 0;
+    this.baseRecruiterCost = 64;
       
     
       
@@ -56,7 +58,7 @@ const GameInstance = class {
   { 
     const cost = Math.floor(this.baseResource2Cost * Math.pow(this.moneyScalingFactor, this.resource2));
 
-    if(this.money > cost)
+    if(this.money >= cost)
     {
       this.resource2 +=1;
       this.money -= cost;
@@ -72,8 +74,8 @@ const GameInstance = class {
     const articleMultiplier = 2; // The base for the exponential function
 
     // Define the range of the random multiplier (e.g., 0.8 to 1.2)
-    const minMultiplier = 0.8;
-    const maxMultiplier = 1.2;
+    const minMultiplier = 0.95;
+    const maxMultiplier = 1.125;
     const randomMultiplier = Math.random() * (maxMultiplier - minMultiplier) + minMultiplier;
   
     // Calculate the total views based on the number of articles
@@ -100,12 +102,13 @@ const GameInstance = class {
   runResource2Work(){
     if(this.articlesWritten > 1)
     {
-      this.articlesWritten += Math.log2(this.resource2 + 1);
-      this.resource1 += Math.log2(this.resource2 + 1);
+      this.articlesWritten += this.resource2;
+      this.resource1 += this.resource2;
       this.views = this.calculateViews();
       this.calculateIncome();
       this.updateDisplay();
     }
+    newColumn();
   }
   
     
@@ -145,6 +148,7 @@ $( document ).ready(function() {
     game.narrativeManager.assess()
     game.updateDisplay()
     updateMoney(game.money);
+    updateViews(game.views);
 }, 500)
   
 

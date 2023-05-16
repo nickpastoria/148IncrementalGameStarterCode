@@ -28,6 +28,8 @@ const narrativeManager = class {
   
   setup(){
     io.hideElement("resource2Row")
+    io.hideElement("recruitersRow")
+    io.hideElement("moneyChart")
     io.hideElement("showPanel2")
     io.hideElement("showPanel3")
   }

@@ -23,7 +23,7 @@
 
   <button onclick=game.swichPanels("panel1") id="showPanel1"> Newsletter</button>
   <button onclick=game.swichPanels("panel2") id="showPanel2"> Marketing</button>
-  <button onclick=game.swichPanels("panel3") id="showPanel3"> Social Media Marketing</button>
+  <button onclick=game.swichPanels("panel3") id="showPanel3"> AI</button>
 
   <div class="panel" id="panel1">
     <canvas id="moneyChart"></canvas> 
@@ -34,6 +34,7 @@
     <tr> <td> Views: </td> <td class="viewsNumber"></td></tr>
     <tr><td> Articles Written: </td> <td> </td> <td class="resource1Number"></td><td><button onclick=game.writeArticle()> Write Article </button></td></tr>
     <tr id="resource2Row"><td> Writers Hired: </td> <td></td> <td class="resource2Number"></td><td><button onclick=game.gainResource2()> Hire Writer</button><td>Cost: <span class="resource2Cost">$1</span></td>
+    <tr id="recruitersRow"><td> Recruiters Hired: </td> <td></td> <td class="recruitersNumber"></td><td><button onclick=game.gainRecruiter()> Hire Recruiter</button><td>Cost: <span class="recruiterCost">$64</span></td>
     </table>
 
 
