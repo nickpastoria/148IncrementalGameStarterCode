@@ -1,7 +1,10 @@
 let moneyChart;
 
-$(document).ready(function() {
-    // Initialize the chart
+var isChartInitialized = false;
+
+function initializeChart() {
+    /// Initialize the chart
+    isChartInitialized = true;
     let ctx = document.getElementById('moneyChart').getContext('2d');
     moneyChart = new Chart(ctx, {
         type: 'line',
@@ -22,39 +25,43 @@ $(document).ready(function() {
             }]
         },
     });
-});
+}
 
 function newColumn() {
-    if(moneyChart.data.labels.length > 100)
-    {
-        moneyChart.data.labels.shift();
+    if(isChartInitialized){
+        if(moneyChart.data.labels.length > 100)
+        {
+            moneyChart.data.labels.shift();
+        }
+        moneyChart.data.labels.push("");
     }
-    moneyChart.data.labels.push("");
 }
 
 function updateMoney(newMoneyValue) {
+    if(isChartInitialized){
+        if (moneyChart.data.datasets[1].data.length > 100) {
+            moneyChart.data.datasets[1].data.shift();
+        }
+        // Add a data point with the current time and the new money value
+        moneyChart.data.datasets[1].data.push(newMoneyValue);
+        // Remove the first data point if there are too many
 
-    if (moneyChart.data.datasets[1].data.length > 100) {
-        moneyChart.data.datasets[1].data.shift();
+        // Update the chart
+        moneyChart.update();
     }
-    // Add a data point with the current time and the new money value
-    moneyChart.data.datasets[1].data.push(newMoneyValue);
-    // Remove the first data point if there are too many
-
-    // Update the chart
-    moneyChart.update();
 }
 
 
 function updateViews(newViewsValue) {
+    if(isChartInitialized){
+        if (moneyChart.data.datasets[0].data.length > 100) {
+            moneyChart.data.datasets[0].data.shift();
+        }
+        // Add a data point with the current time and the new money value
+        moneyChart.data.datasets[0].data.push(newViewsValue);
+        // Remove the first data point if there are too many
 
-    if (moneyChart.data.datasets[0].data.length > 100) {
-        moneyChart.data.datasets[0].data.shift();
+        // Update the chart
+        moneyChart.update();
     }
-    // Add a data point with the current time and the new money value
-    moneyChart.data.datasets[0].data.push(newViewsValue);
-    // Remove the first data point if there are too many
-
-    // Update the chart
-    moneyChart.update();
 }

@@ -2,12 +2,10 @@ const GameInstance = class {
   constructor() {
     this.narrativeManager = new narrativeManager(this)
     
-    this.stages = ["stage1", "stage2", "stage3"];
+    this.stages = ["stage1"];
     this.currentStage = "stage1"; 
     this.panels = {
-      "stage1": ["panel1", "panel2", "panel3"],
-      "stage2": ["panel2-1"],
-      "stage3": ["panel3-1"]
+      "stage1": ["panel1", "panel2", "panel3"]
     }
     this.currentPanel = "panel1";
 
@@ -39,7 +37,7 @@ const GameInstance = class {
     const incomePercentage = Math.random() * (maxPercentage - minPercentage) + minPercentage;
     var income = Math.floor(Math.sqrt(this.views) * incomePercentage);
 
-    if(this.views > 20 && income < 1) income = 1;
+    if(this.views > 15 && income < 1) income = 1;
   
     // Update the money count and display
     this.money += income;
@@ -64,6 +62,20 @@ const GameInstance = class {
       this.money -= cost;
       const costElement = document.querySelector(".resource2Cost");
       costElement.textContent = Math.floor(this.baseResource2Cost * Math.pow(this.moneyScalingFactor, this.resource2 + 1));
+      this.updateDisplay();
+    }
+    
+  }
+  gainRecruiter()
+  { 
+    const cost = Math.floor(this.baseRecruiterCost * Math.pow(this.moneyScalingFactor, this.recruiters));
+
+    if(this.money >= cost)
+    {
+      this.recruiters +=1;
+      this.money -= cost;
+      const costElement = document.querySelector(".recruiterCost");
+      costElement.textContent = Math.floor(this.baseResource2Cost * Math.pow(this.moneyScalingFactor, this.recruiters + 1));
       this.updateDisplay();
     }
     
@@ -104,6 +116,7 @@ const GameInstance = class {
     {
       this.articlesWritten += this.resource2;
       this.resource1 += this.resource2;
+      this.resource2 += this.recruiters;
       this.views = this.calculateViews();
       this.calculateIncome();
       this.updateDisplay();
@@ -114,8 +127,13 @@ const GameInstance = class {
     
   // this function takes in a panel 
   swichPanels(panel) {
+    if (panel === "panel2" && !isChartInitialized) {
+      initializeChart();
+      isChartInitialized = true;
+   }
+    io.hideElement(game.currentPanel);
     game.currentPanel = panel;
-    io.showPanel(game);    
+    io.showElement(game.currentPanel);    
   }
   
   updateDisplay() {

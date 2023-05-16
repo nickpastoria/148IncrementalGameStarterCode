@@ -13,15 +13,21 @@ const narrativeManager = class {
     test: function(data){return data.resource1 >= 10}, 
     unlock:function(){io.showElement("resource2Row")}, 
     report: function(){
-      io.appendIntoElement("You have progressed far enough to discover R2", "reports");
+      io.appendIntoElement("You are considering getting help", "reports");
       io.writeIntoElement ("Newsletter Clicker", "era");
       }
   },
   {
     triggered: false,
-    test: function(data){return data.resource2 >= 10}, 
-    unlock:function(){io.showElement("showPanel2")},  
-    report: function(){io.appendIntoElement("You unlocked a new dimension of management", "reports");}
+    test: function(data){return data.resource2 >= 4}, 
+    unlock:function(){io.showElement("showPanel2")},
+    report: function(){io.appendIntoElement("You now have access to management features", "reports");}
+  },
+  {
+    triggered: false,
+    test: function(data){return data.resource2 >= 5}, 
+    unlock:function(){io.showElement("recruitersRow")},
+    report: function(){io.appendIntoElement("You now have access to recruiters", "reports");}
   },
   ]
   }
@@ -29,9 +35,10 @@ const narrativeManager = class {
   setup(){
     io.hideElement("resource2Row")
     io.hideElement("recruitersRow")
-    io.hideElement("moneyChart")
     io.hideElement("showPanel2")
     io.hideElement("showPanel3")
+    io.hideElement("panel2")
+    io.hideElement("panel3")
   }
 
 

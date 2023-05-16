@@ -1,65 +1,49 @@
 <!DOCTYPEhtml><head>
-<title>Newsletter Clicker</title>
-
-<script src="chart.js"></script>
-<script src="jquery-1.11.2.min.js"></script>
-<script src="input_output.js"></script>
-<script src="mathUtil.js"></script>
-
-<script src="narrativeManager.js"></script>
-<script src="incremental.js"></script>
-<script src="statAnalysis.js"></script>
-<link rel="stylesheet" type="text/css" href="styles.css">
-
-
-
-</head>
-<body>
-<div id="reports" style=> </div> 
-<div class="stage" id="stage1" style="z-index: 1"> 
-
-
-<h1> <span id=era>Blog Clicker</span></h1> 
-
-  <button onclick=game.swichPanels("panel1") id="showPanel1"> Newsletter</button>
-  <button onclick=game.swichPanels("panel2") id="showPanel2"> Marketing</button>
-  <button onclick=game.swichPanels("panel3") id="showPanel3"> AI</button>
-
-  <div class="panel" id="panel1">
-    <canvas id="moneyChart"></canvas> 
-    <table>
-    <tr> <td>
-    <table>
-    <tr> <td> Money: $</td> <td class="moneyNumber"></td></tr>
-    <tr> <td> Views: </td> <td class="viewsNumber"></td></tr>
-    <tr><td> Articles Written: </td> <td> </td> <td class="resource1Number"></td><td><button onclick=game.writeArticle()> Write Article </button></td></tr>
-    <tr id="resource2Row"><td> Writers Hired: </td> <td></td> <td class="resource2Number"></td><td><button onclick=game.gainResource2()> Hire Writer</button><td>Cost: <span class="resource2Cost">$1</span></td>
-    <tr id="recruitersRow"><td> Recruiters Hired: </td> <td></td> <td class="recruitersNumber"></td><td><button onclick=game.gainRecruiter()> Hire Recruiter</button><td>Cost: <span class="recruiterCost">$64</span></td>
-    </table>
-
-
-  </div>
-
-
-
-<!-- delete the following 2 panels if you structuring with sequential stages -->
-  <div class="panel"  id="panel2">
-  <h1> Panel 2</h1>
-
-   </div>
-
-  <div class="panel"  id="panel3"> <h1> Panel 3</div>
-  </div>
-
-<!-- delete the following 2 stages if you are only doing panels -->
-<div class="stage" id="stage2" style="z-index: 1"> <h1>Stage 2</h1><h2>Subtitle</h2></div>
-<div class="panel"  id="panel2-1">
-</div>
-
-<div class="stage" id="stage3" style="z-index: 1"> <h1>Stage 3</h1><h2>Subtitle</h2>
-<div class="panel"  id="panel3-1">
-</div>
-
-<script src="graph.js"></script>
-</body>
-</html>
+  <title>Newsletter Clicker</title>
+  
+  <script src="chart.js"></script>
+  <script src="jquery-1.11.2.min.js"></script>
+  <script src="input_output.js"></script>
+  <script src="mathUtil.js"></script>
+  
+  <script src="narrativeManager.js"></script>
+  <script src="incremental.js"></script>
+  <script src="statAnalysis.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  
+  </head>
+  <body>
+  <div id="reports" style=> </div> 
+  <div class="stage" id="stage1" style="z-index: 1"> 
+  
+  <h1> <span id=era>Blog Clicker</span></h1> 
+  
+    <button onclick=game.swichPanels("panel1") id="showPanel1"> Newsletter</button>
+    <button onclick=game.swichPanels("panel2") id="showPanel2"> Marketing</button>
+    <button onclick=game.swichPanels("panel3") id="showPanel3"> AI</button>
+  
+    <div class="panel" id="panel1">
+      <table>
+      <tr> <td>
+      <table>
+      <tr> <td> Money: $</td> <td class="moneyNumber"></td></tr>
+      <tr> <td> Views: </td> <td class="viewsNumber"></td></tr>
+      <tr><td> Articles Written: </td> <td> </td> <td class="resource1Number"></td><td><button onclick=game.writeArticle()> Write Article </button></td></tr>
+      <tr id="resource2Row"><td> Writers Hired: </td> <td></td> <td class="resource2Number"></td><td><button onclick=game.gainResource2()> Hire Writer</button><td>Cost: <span class="resource2Cost">$1</span></td>
+      <tr id="recruitersRow"><td> Recruiters Hired: </td> <td></td> <td class="recruitersNumber"></td><td><button onclick=game.gainRecruiter()> Hire Recruiter</button><td>Cost: <span class="recruiterCost">$64</span></td>
+      </table>
+    </div>
+  
+    <div class="panel"  id="panel2">
+      <canvas id="moneyChart"></canvas>
+    </div>
+  
+    <div class="panel"  id="panel3"> 
+      <h1> Panel 3</h1>
+    </div>
+  
+  </div> <!-- end of .stage -->
+  <script src="graph.js"></script>
+  </body>
+  </html>
+  
