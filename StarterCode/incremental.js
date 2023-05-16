@@ -144,6 +144,7 @@ $( document ).ready(function() {
     game.runResource2Work();
     game.narrativeManager.assess()
     game.updateDisplay()
+    updateMoney(game.money);
 }, 500)
   
 

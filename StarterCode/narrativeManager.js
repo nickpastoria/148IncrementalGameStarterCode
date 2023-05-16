@@ -14,7 +14,7 @@ const narrativeManager = class {
     unlock:function(){io.showElement("resource2Row")}, 
     report: function(){
       io.appendIntoElement("You have progressed far enough to discover R2", "reports");
-      io.writeIntoElement ("Updated Name", "era");
+      io.writeIntoElement ("Newsletter Clicker", "era");
       }
   },
   {

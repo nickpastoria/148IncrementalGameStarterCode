@@ -1,7 +1,7 @@
 <!DOCTYPEhtml><head>
 <title>Newsletter Clicker</title>
 
-
+<script src="chart.js"></script>
 <script src="jquery-1.11.2.min.js"></script>
 <script src="input_output.js"></script>
 <script src="mathUtil.js"></script>
@@ -9,21 +9,8 @@
 <script src="narrativeManager.js"></script>
 <script src="incremental.js"></script>
 <script src="statAnalysis.js"></script>
+<link rel="stylesheet" type="text/css" href="styles.css">
 
-<style>
-.selected {
-  color: red;
-  background-color: #beef
-}
-#reports {
-  overflow-y: scroll; 
-  border: 1px solid black; 
-  height: 100px; 
-  width: 50%;
-  margins:auto;
-  display: inline-block;
-}
-</style>
 
 
 </head>
@@ -32,20 +19,21 @@
 <div class="stage" id="stage1" style="z-index: 1"> 
 
 
-<h1> <span id=era>Newsletter Clicker</span></h1> 
+<h1> <span id=era>Blog Clicker</span></h1> 
 
   <button onclick=game.swichPanels("panel1") id="showPanel1"> Newsletter</button>
   <button onclick=game.swichPanels("panel2") id="showPanel2"> Marketing</button>
   <button onclick=game.swichPanels("panel3") id="showPanel3"> Social Media Marketing</button>
 
-  <div class="panel" id="panel1"> 
+  <div class="panel" id="panel1">
+    <canvas id="moneyChart"></canvas> 
     <table>
     <tr> <td>
     <table>
     <tr> <td> Money: $</td> <td class="moneyNumber"></td></tr>
     <tr> <td> Views: </td> <td class="viewsNumber"></td></tr>
     <tr><td> Articles Written: </td> <td> </td> <td class="resource1Number"></td><td><button onclick=game.writeArticle()> Write Article </button></td></tr>
-    <tr id="resource2Row"><td> Writer Hired: </td> <td></td> <td class="resource2Number"></td><td><button onclick=game.gainResource2()> Hire Writer</button><td>Cost: <span class="resource2Cost">$1</span></td>
+    <tr id="resource2Row"><td> Writers Hired: </td> <td></td> <td class="resource2Number"></td><td><button onclick=game.gainResource2()> Hire Writer</button><td>Cost: <span class="resource2Cost">$1</span></td>
     </table>
 
 
@@ -71,6 +59,6 @@
 <div class="panel"  id="panel3-1">
 </div>
 
-
+<script src="graph.js"></script>
 </body>
 </html>

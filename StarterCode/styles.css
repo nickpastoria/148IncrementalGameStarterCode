@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  h1, h2 {
+    text-align: center;
+  }
+  
+  .stage {
+    margin: 20px auto;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  }
+  
+  .panel {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  table {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  button {
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  #reports {
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    height: 100px;
+    width: 50%;
+    overflow-y: scroll;
+  }
+  
+  .selected {
+    color: red;
+    background-color: #eef;
+  }
+  
