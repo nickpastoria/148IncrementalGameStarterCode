@@ -17,7 +17,7 @@ const GameInstance = class {
     this.articlesWritten = 0;
     this.resource1 = 0;
     this.resource2 = 0;
-    this.baseResource2Cost = 50;
+    this.baseResource2Cost = 1;
       
     
       
@@ -35,15 +35,17 @@ const GameInstance = class {
   
     // Calculate the income based on the current number of views
     const incomePercentage = Math.random() * (maxPercentage - minPercentage) + minPercentage;
-    const income = Math.floor(this.views * incomePercentage);
+    var income = Math.floor(Math.sqrt(this.views) * incomePercentage);
+
+    if(this.views > 20 && income < 1) income = 1;
   
     // Update the money count and display
     this.money += income;
     this.updateDisplay();
   
     // Display a message in the reports section
-    const reportMessage = `You earned ${income} money from ${this.views} views.`;
-    io.appendIntoElement(reportMessage, "reports");
+    //const reportMessage = `You earned ${income} money from ${this.views} views.`;
+    //io.appendIntoElement(reportMessage, "reports");
   }
   
   
@@ -59,24 +61,29 @@ const GameInstance = class {
       this.resource2 +=1;
       this.money -= cost;
       const costElement = document.querySelector(".resource2Cost");
-      costElement.textContent = cost;
+      costElement.textContent = Math.floor(this.baseResource2Cost * Math.pow(this.moneyScalingFactor, this.resource2 + 1));
       this.updateDisplay();
     }
     
   }
 
   calculateViews() {
-    const baseViews = 0.5; // The base number of views per article
-    const articleMultiplier = 1.125; // The multiplier for each article
+    const baseViews = 1; // The base number of views per article
+    const articleMultiplier = 2; // The base for the exponential function
+
+    // Define the range of the random multiplier (e.g., 0.8 to 1.2)
+    const minMultiplier = 0.8;
+    const maxMultiplier = 1.2;
+    const randomMultiplier = Math.random() * (maxMultiplier - minMultiplier) + minMultiplier;
   
     // Calculate the total views based on the number of articles
     // Calculate the views based on diminishing returns
-    const totalViews = calculateDiminishingViews(this.articlesWritten, baseViews, articleMultiplier);
-
+    const totalViews = baseViews * Math.sqrt(this.articlesWritten * articleMultiplier) * randomMultiplier;
   
     // Return the total views
     return Math.floor(totalViews);
   }
+
 
   writeArticle() {
     // Code to create a new article
@@ -84,9 +91,6 @@ const GameInstance = class {
     this.articlesWritten += 1;
     // Increment the views count based on the new article
     this.views == this.calculateViews();
-  
-    // Call the calculateIncome() function to determine the money earned
-    this.calculateIncome();
   
     // Update the display
     this.updateDisplay();
@@ -96,8 +100,8 @@ const GameInstance = class {
   runResource2Work(){
     if(this.articlesWritten > 1)
     {
-      this.articlesWritten += this.resource2;
-      this.resource1 += this.resource2;
+      this.articlesWritten += Math.log2(this.resource2 + 1);
+      this.resource1 += Math.log2(this.resource2 + 1);
       this.views = this.calculateViews();
       this.calculateIncome();
       this.updateDisplay();
@@ -113,7 +117,7 @@ const GameInstance = class {
   
   updateDisplay() {
     // Update the display for resource1 and resource2 as before
-    io.writeValueIntoClass(this.resource1, "resource1Number");
+    io.writeValueIntoClass(Math.floor(this.resource1), "resource1Number");
     io.writeValueIntoClass(this.resource2, "resource2Number");
   
     // Update the display for money and views
